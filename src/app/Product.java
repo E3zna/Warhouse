@@ -1,3 +1,7 @@
+/*
+ * @author Trizna Yevhen
+ * @version 1.0.0
+ */
 package app;
 
 public class Product {
