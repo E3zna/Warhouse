@@ -1,5 +1,7 @@
 package app;
 
+import java.util.Scanner;
+
 public class ProductInfo {
     static String name;
     static double weight;
@@ -9,13 +11,36 @@ public class ProductInfo {
     private static final String MEASURE = "кг";
 
     public static void main(String[] args) {
-        product = new Product();
-        name = "Apple";
-        quantity = 35;
-        weight = 56.67;
-        totalWeight = (double)quantity * weight;
-        System.out.println("------------------------\n" +
+        doInputs();
+        showInfo(handleData());
+    }
+
+    static private void doInputs() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Наименование товара: ");
+        name = scanner.nextLine();
+        System.out.print("Вес товара" + " (" + MEASURE + "): ");
+        weight = scanner.nextDouble();
+        System.out.print("Количество товара (шт.): ");
+        quantity = scanner.nextInt();
+        scanner.close();
+    }
+
+    static private String handleData() {
+
+        product = new Product(name, weight);
+        name = product.getName();
+        totalWeight = getTotalWeight(product.getWeight(), quantity);
+        return "------------------------\n" +
                 "Общий вес товара " + name + " (" + MEASURE + "): "
-                + totalWeight);
+                + totalWeight;
+    }
+
+    static private double getTotalWeight(double weight, int quantity) {
+        return weight * quantity;
+    }
+
+    static private void showInfo(String output) {
+        System.out.println(output);
     }
 }
