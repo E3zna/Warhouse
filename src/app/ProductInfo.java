@@ -7,6 +7,7 @@ public class ProductInfo {
     static double weight;
     static int quantity;
     static double totalWeight;
+    static String totalWeightRounded;
     static Product product;
     private static final String MEASURE = "кг";
 
@@ -31,13 +32,18 @@ public class ProductInfo {
         product = new Product(name, weight);
         name = product.getName();
         totalWeight = getTotalWeight(product.getWeight(), quantity);
+        totalWeightRounded = getTotalWeightRounded(totalWeight);
         return "------------------------\n" +
                 "Общий вес товара " + name + " (" + MEASURE + "): "
-                + totalWeight;
+                + totalWeightRounded;
     }
 
     static private double getTotalWeight(double weight, int quantity) {
         return weight * quantity;
+    }
+
+    static private String getTotalWeightRounded(double totalWeight) {
+        return Rounder.roundWeight(totalWeight);
     }
 
     static private void showInfo(String output) {
